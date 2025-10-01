@@ -5,19 +5,6 @@ import { useEffect } from "react";
 const TodoContext = createContext();
 const TodoDispatchContext = createContext();
 
-const todosList = [
-  {
-    id: 1,
-    content: "TODOリストを作成しよう。",
-    editing: false,
-  },
-  {
-    id: 2,
-    content: "ダブルクリックで編集可能です。",
-    editing: false,
-  },
-];
-
 const todoReducer = (todos, action) => {
   switch (action.type) {
     case "todo/init":
