@@ -1,6 +1,7 @@
 import Todo from "./components/todo/Todo"
 import Timer from "./components/timer/Timer"
 import { ChakraProvider, Container, Heading, Divider, Box } from "@chakra-ui/react";
+import "./api/todo";
 
 const App = () => {
   return (

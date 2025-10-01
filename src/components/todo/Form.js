@@ -36,25 +36,33 @@
 import { useState } from "react";
 import { useDispatchTodos } from "../../context/TodoContext";
 import { HStack, Input, Button } from "@chakra-ui/react";
+import todoApi from "../../api/todo";
 
-const Form = ({ createTodo }) => {
+const Form = () => {
   const [enteredTodo, setEnteredTodo] = useState("");
   const dispatch = useDispatchTodos();
 
   const addTodo = (e) => {
     e.preventDefault();
 
-    if (!enteredTodo.trim()) return; // 空文字チェック
+    if (!enteredTodo.trim()) return; // 空文字チェック         
 
+    // const newTodo = {
+    //   id: Math.floor(Math.random() * 1e5),
+    //   content: enteredTodo,
+    //   editing: false,
+    // };
     const newTodo = {
-      id: Math.floor(Math.random() * 1e5),
+      id: Math.floor(Math.random() * 1e5).toString(),
       content: enteredTodo,
-      editing: false,
+      editing: false
     };
 
-    dispatch({ type: "todo/add", todo: newTodo });
+    todoApi.post(newTodo).then(newTodo => {
+      dispatch({ type: "todo/add", todo: newTodo });
+      setEnteredTodo("");
+    })
 
-    setEnteredTodo("");
   };
 
   return (
